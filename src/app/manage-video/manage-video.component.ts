@@ -39,6 +39,17 @@ export class ManageVideoComponent implements OnInit {
       });
   }
 
+  searchVideo(query: any) {
+    this.videoService
+      .getVideosByUser(this.currentUser._id)
+      .subscribe((data: any) => {
+        this.videoList = data.filter((video: any) =>
+          video.title.toLowerCase().includes(query.toLowerCase())
+        );
+        console.log(this.videoList);
+      });
+  }
+
   fetchSharedVideos() {
     this.videoService
       .getSharedVideos(this.currentUser._id)
